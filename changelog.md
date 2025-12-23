@@ -1,5 +1,7 @@
 # Changelog  
 
+This is a list of all changes made by zer0Kerbal prior to the adoption by Linuxgurugamer
+
 
 ## Version 2.0.99.5-prerelease - `<Спасибо evanisrael>` edition
 
