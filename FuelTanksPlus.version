@@ -1,20 +1,20 @@
 {
-	"NAME"		     : "Fuel Tanks Plus (FTP) by NecroBones(aka Orvidius)",
-	"URL"			 : "https://raw.githubusercontent.com/zer0Kerbal/FuelTanksPlus/master/FuelTanksPlus.version",
-	"DOWNLOAD"	     : "https://github.com/zer0Kerbal/FuelTanksPlus/releases/latest",
-	"CHANGE_LOG_URL" : "https://raw.githubusercontent.com/zer0Kerbal/FuelTanksPlus/master/changelog.md",
+	"NAME"			: "Fuel Tanks Plus (FTP) by NecroBones(aka Orvidius)",
+	"URL"			: "https://raw.githubusercontent.com/linuxgurugamer/FuelTanksPlus/master/FuelTanksPlus.version",
+	"DOWNLOAD"		: "https://github.com/linuxgurugamer/FuelTanksPlus/releases/latest",
+	"CHANGE_LOG_URL"	: "https://raw.githubusercontent.com/linuxgurugamer/FuelTanksPlus/master/changelog.md",
 	"GITHUB" :
 	{
-		"USERNAME"		  : "zer0Kerbal",
+		"USERNAME"		: "linuxgurugamer",
 		"REPOSITORY"		: "FuelTanksPlus",
-		"ALLOW_PRE_RELEASE" : false
+		"ALLOW_PRE_RELEASE" 	: false
 	},
 	"VERSION" :
 	{
 		"MAJOR" : 2,
-		"MINOR" : 0,
-		"PATCH" : 99,
-		"BUILD" : 6
+		"MINOR" : 2,
+		"PATCH" : 0,
+		"BUILD" : 0
 	},
 	"KSP_VERSION" :
 	{
@@ -28,10 +28,16 @@
 		"MINOR" : 3,
 		"PATCH" : 1
 	},
+	"KSP_VERSION_MAX:
+	{
+		"MAJOR" : 1,
+		"MINOR" : 12
+		"PATCH" : 99
+	},
 	"INSTALL_LOC" :
 	{
 		"NAME"	: "FuelTanksPlus",
-		"DIRECTORY" : "FuelTanksPlus/FuelTanksPlus"
+		"DIRECTORY" : "FuelTanksPlus"
 	},
 	"INSTALL_LOC" :
 	{

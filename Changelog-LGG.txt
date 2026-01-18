@@ -1,5 +1,6 @@
 Changelog
 
+2.2.0
 	Adoption by Linuxgurugamer
 	Moved FuelTanksPlus folder up out of the NecroBones folder
 	Added missing squad textures 
