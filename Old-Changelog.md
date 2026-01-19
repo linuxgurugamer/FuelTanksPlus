@@ -1,6 +1,8 @@
 # Changelog  
 
 This is a list of all changes made by zer0Kerbal prior to the adoption by Linuxgurugamer
+Note that a number of the changes listed here were actually released by Linuxgurugamer as 
+documented in the forum (search for FTP-Patches).  There was no acknowledgement by zer0kerbal
 
 
 ## Version 2.0.99.5-prerelease - `<Спасибо evanisrael>` edition

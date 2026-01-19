@@ -4,12 +4,15 @@ Changelog
 	Adoption by Linuxgurugamer
 	Moved FuelTanksPlus folder up out of the NecroBones folder
 	Added missing squad textures 
+	Updated all parts to use the local squad textures
 	Added patch to update files to point to squad textures
 	Commented out all lines referring to FTPcolorSwitch
-	From Necrobones changelog:
-		Fixed bad mistake on spreadsheet, which caused many of the values to be way off
-		Added patch for ReStockPlus.  If ReStockPlus is installed, then the values
-		added are the same as ReStockPlus, which are different than my calculations
 	Put the RemoveShrouds patch into a Patchmanager patch
 	Modified fuel switcher patch to use B9PartSwitch before others 
 	Added VABOrganizer configs
+	Updated patches to have the fuel switches run last, so that volumes get updated before the fuel switchers are added
+	Updated description of TPtankTri
+	Updated tank capacity of TPtankTri
+	Updated all categories to FuelTank
+	Fixed patch order loading
+	Applied fuelPatch.cfg from FTP-Patches-v7 to all parts
