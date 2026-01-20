@@ -18,3 +18,5 @@ Changelog
 	Applied fuelPatch.cfg from FTP-Patches-v7 to all parts
 	Fixed the texture switching for the radial tanks
 	Added B9 support for texture switching for the radial tanks
+	Fixed a mass discrepency error which occurred when Firespitter was being used
+	Fixed error when B9 was being used, variables were being left behind because the code to delete them was wrong
