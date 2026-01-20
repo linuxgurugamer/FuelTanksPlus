@@ -16,3 +16,5 @@ Changelog
 	Updated all categories to FuelTank
 	Fixed patch order loading
 	Applied fuelPatch.cfg from FTP-Patches-v7 to all parts
+	Fixed the texture switching for the radial tanks
+	Added B9 support for texture switching for the radial tanks
