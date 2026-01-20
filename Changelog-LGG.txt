@@ -21,3 +21,4 @@ Changelog
 	Fixed a mass discrepency error which occurred when Firespitter was being used
 	Fixed error when B9 was being used, variables were being left behind because the code to delete them was wrong
 	Fixed error when Firespitter or InterstellarFuelSwitch was being used, variables were being left behind because the code to delete them was wrong
+	Adjusted height of the TPtank3mL11250 and TPtank3mL05225 to match the stock tank Size3MediumTank proportionally
