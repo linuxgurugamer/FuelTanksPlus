@@ -1,5 +1,6 @@
 Fuel Tanks Plus
 
+
 Parts Pack
 
 What is "Fuel Tanks Plus" exactly? Simply, it's a set of fuel tanks that are 1.5x the length of the largest stock tanks in each diameter, plus fuel-filled nose cones for those diameters. These tanks are meant to give you some visual choice of styles that are loosely inspired by real-world rockets from NASA, ESA, and private space firms (though that inspiration is mainly in color choice), while maintaining the style established in the Color Coded Canisters mod (since CCC replaces stock visuals, any "new" tanks should be spun off into a separate pack, and hence we have FTP).
@@ -15,9 +16,12 @@ Cooperates with other mods:
 
 REQUIRED Dependencies: (version 1.0+)
 
-    ModuleManager
+    * ModuleManager
 
-    (for FTP versions prior to 2.0.0): Interstellar Fuel Switch (Core-only is OK). (Firespitter will also work)
+RECOMMENDED for Fuel/texture switching (one of the following)
+    * B9PartSwitch (preferred)
+    * Interstellar Fuel Switch (Core-only is OK). 
+    * Firespitter (Core-only is OK)
 
 Part of the NecroBones suite of mods, that work nicely together:
 
@@ -30,8 +34,20 @@ Part of the NecroBones suite of mods, that work nicely together:
 
 Design Goals
 
-Provide some new visual styles, to dress up the booster sections of your rockets.
-Help mildly reduce part count and wobble, by providing larger tanks.
-Be as memory efficient as possible. Each diameter has a shared texture to keep memory usage low.
-Follow the same colors and artistic style established in Color Coded Canisters.
+    * Provide some new visual styles, to dress up the booster sections of your rockets.
+    * Help mildly reduce part count and wobble, by providing larger tanks.
+    * Be as memory efficient as possible. Each diameter has a shared texture to keep memory usage low.
+    * Follow the same colors and artistic style established in Color Coded Canisters.
  
+
+Image Gallery
+
+    Disclaimer 1: Note that the stats, appearances, and descriptions of the parts shown below are subject to change, or may be out of date.
+
+    Disclaimer 2: The "Delta IV Heavy" shown in some screenshots below includes parts from several other mods.
+
+![banner.jpg](https://i.imgur.com/glltsTa.jpeg)
+
+[Version 1.0 Overhaul overview](https://youtu.be/wuxzfhtiCgI)
+
+[Kottabas YouTube review](https://youtu.be/bWo2u1lKdaY)
