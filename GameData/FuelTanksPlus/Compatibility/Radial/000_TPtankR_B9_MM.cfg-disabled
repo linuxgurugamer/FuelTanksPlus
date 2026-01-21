@@ -1,0 +1,72 @@
+// This patch supports  B9 Part Switch 
+
+@PART[TPtankR??]:NEEDS[B9PartSwitch&!CryoTanks&!ModularFuelTanks&!RealFuels]:FOR[FuelTanksPlus]
+{
+    // --- temp values stored in a disposable node ---
+    __TMP_FTP_B9PS
+    {
+        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
+        @totalCap += #$../RESOURCE[Oxidizer]/maxAmount$
+
+        %massOffset = #$../mass$
+        @massOffset *= -1
+    }
+
+	MODULE
+	{
+		name = ModuleB9PartSwitch
+		moduleID = fuelSwitch
+		switcherDescription = Tank Type
+		baseVolume = #$../__TMP_FTP_B9PS/totalCap$
+
+		SUBTYPE
+		{
+			name = MonoPropellant
+			tankType = FTPMonoPropellant
+			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
+			TEXTURE
+			{
+				baseTransform = TPtankR-rim
+				texture = FuelTanksPlus/Assets/Radial/TPtankR-rimGold-Specular
+			}
+		}
+		SUBTYPE
+		{
+			name = LF/O
+			tankType = FTPLFO
+			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
+			TEXTURE
+			{
+				baseTransform = TPtankR-rim
+				texture = FuelTanksPlus/Assets/Radial/TPtankR-rimBlack-Specular
+			}
+		}
+		SUBTYPE
+		{
+			name = LiquidFuel
+			tankType = FTPLiquidFuel
+			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
+			TEXTURE
+			{
+				baseTransform = TPtankR-rim
+				texture = FuelTanksPlus/Assets/Radial/TPtankR-rimRed-Specular
+			}
+		}
+		SUBTYPE
+		{
+			name = Oxidizer
+			tankType = FTPOxidizer
+			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
+			TEXTURE
+			{
+				baseTransform = TPtankR-rim
+				texture = FuelTanksPlus/Assets/Radial/TPtankR-rimBlue-Specular
+			}
+		}
+	}
+	!RESOURCE[LiquidFuel] {}
+	!RESOURCE[Oxidizer] {}
+    // --- delete the temp node so nothing “lingers” in the final part ---
+    !__TMP_FTP_B9PS {}
+}
+

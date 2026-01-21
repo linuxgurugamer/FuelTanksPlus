@@ -1,5 +1,5 @@
 
-// All fuel switching rules are here. Paint-switching rules are in each of the 
+// All non-B9PartSwitchfuel switching rules are here. Paint-switching rules are in each of the 
 // category folders with the parts located there, since each size-class has
 // its own set of colors and mesh names.
 
@@ -15,81 +15,6 @@
 	@stack_PriUsesSurf = True
 }
 
-
-//--------------------------------------------------------------------------------
-// Set up the tank types we use, if B9 is installed:
-
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPOxidizer
-	tankMass = 0.000125
-	tankCost = 0.0
-	RESOURCE
-	{
-		name = Oxidizer
-		unitsPerVolume = 1
-	}
-}
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPLiquidFuel
-	tankMass = 0.000125
-	tankCost = 0.0
-	RESOURCE
-	{
-		name = LiquidFuel
-		unitsPerVolume = 1
-	}
-}
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPLFO
-	tankMass = 0.000125
-	tankCost = 0.0
-	RESOURCE
-	{
-		name = LiquidFuel
-		unitsPerVolume = 0.45
-	}
-	RESOURCE
-	{
-		name = Oxidizer
-		unitsPerVolume = 0.55
-	}
-}
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPMonoPropellant
-	tankMass = 0.0004
-	tankCost = 1.5
-	RESOURCE
-	{
-		name = MonoPropellant
-		unitsPerVolume = 1.2 // 1.175
-	}
-}
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPXenon
-	tankMass = 0.0022
-	tankCost = 55
-	RESOURCE
-	{
-		name = XenonGas
-		unitsPerVolume = 42 // 28
-	}
-}
-B9_TANK_TYPE:NEEDS[B9PartSwitch]
-{
-	name = FTPOre
-	tankMass = 0.00025
-	tankCost = 3.0
-	RESOURCE
-	{
-		name = Ore
-		unitsPerVolume = 0.2 // 2
-	}
-}
 
 //--------------------------------------------------------------------------------
 // Bulk update tanks with Firespitter or InterstellarFuelSwitch:
@@ -179,7 +104,7 @@ B9_TANK_TYPE:NEEDS[B9PartSwitch]
 		resourceGui:NEEDS[InterstellarFuelSwitch] = LiquidFuel;Oxidizer;Xenon;MonoPropellant;Ore
 		resourceNames = LiquidFuel;Oxidizer;XenonGas;MonoPropellant;Ore
 		resourceAmounts = #$../__TMP_FTP_NUKE/LF$;$../__TMP_FTP_NUKE/OX$;$../__TMP_FTP_NUKE/Xenon$;$../__TMP_FTP_NUKE/Monoprop$;$../__TMP_FTP_NUKE/Ore$
-		//basePartMass = 0
+		basePartMass = #$../mass$
 		tankMass = #$../__TMP_FTP_NUKE/LFTankMass$;$../__TMP_FTP_NUKE/OXTankMass$;$../__TMP_FTP_NUKE/XenonTankMass$;$../__TMP_FTP_NUKE/MonopropTankMass$;$../__TMP_FTP_NUKE/OreTankMass$
 		tankTechReq:NEEDS[InterstellarFuelSwitch] = start;start;ionPropulsion;advFuelSystems;advScienceTech
 	}
@@ -203,7 +128,11 @@ B9_TANK_TYPE:NEEDS[B9PartSwitch]
 		%OXTankMass = #$OX$
 		@OXTankMass *= 0.000125
 
-		%totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
+		%LFOTankMass = #$LFTankMass$ 
+		@LFOTankMass += #$OXTankMass$
+
+        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
+        @totalCap += #$../RESOURCE[Oxidizer]/maxAmount$
 
 		%Xenon = #$totalCap$
 		@Xenon *= 42
@@ -227,9 +156,10 @@ B9_TANK_TYPE:NEEDS[B9PartSwitch]
 		tankSwitchNames:NEEDS[InterstellarFuelSwitch] = LF+OX;Xenon;MonoProp
 		resourceGui:NEEDS[InterstellarFuelSwitch] = LiquidFuel+Oxidizer;Xenon;MonoPropellant
 		resourceNames = LiquidFuel,Oxidizer;XenonGas;MonoPropellant
-		resourceAmounts = 22.5,27.5;2800;235
+		resourceAmounts = #$../__TMP_FTP_TRI/LF$,$../__TMP_FTP_TRI/OX$;$../__TMP_FTP_TRI/Xenon$;$../__TMP_FTP_TRI/Monoprop$
+
 		basePartMass = #$../mass$
-		tankMass = #$../__TMP_FTP_TRI/LFTankMass$;$../__TMP_FTP_TRI/XenonTankMass$;$../__TMP_FTP_TRI/MonopropTankMass$
+		tankMass = #$../__TMP_FTP_TRI/LFOTankMass$;$../__TMP_FTP_TRI/XenonTankMass$;$../__TMP_FTP_TRI/MonopropTankMass$
 		tankTechReq:NEEDS[InterstellarFuelSwitch] = start;ionPropulsion;advFuelSystems
 	}
 	!RESOURCE[LiquidFuel] {}
@@ -287,227 +217,6 @@ B9_TANK_TYPE:NEEDS[B9PartSwitch]
 }
 
 
-
-
-//--------------------------------------------------------------------------------
-// Bulk update tanks with B9PartSwitch:
-
-
-@PART[TPtankL*|TPtank?mL*|TPdome*|TPcone*|TPtank?m?mA]:HAS[@RESOURCE[LiquidFuel],@RESOURCE[Oxidizer],!MODULE[InterstellarFuelSwitch],!MODULE[FSfuelSwitch],!MODULE[ModuleB9PartSwitch]]:NEEDS[B9PartSwitch&!CryoTanks&!ModularFuelTanks&!RealFuels]:AFTER[FuelTanksPlus]
-{
-    // --- temp values stored in a disposable node ---
-    __TMP_FTP_B9PS
-    {
-        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
-        @totalCap += #$../RESOURCE[Oxidizer]/maxAmount$
-
-        %massOffset = #$../mass$
-        @massOffset *= -1
-    }	
-
-	MODULE
-	{
-		name = ModuleB9PartSwitch
-		moduleID = fuelSwitch
-		switcherDescription = Tank Type
-		baseVolume = #$../__TMP_FTP_B9PS/totalCap$
-
-		SUBTYPE
-		{
-			name = LF/O
-			tankType = FTPLFO
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = LiquidFuel
-			tankType = FTPLiquidFuel
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = Oxidizer
-			tankType = FTPOxidizer
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = MonoPropellant
-			tankType = FTPMonoPropellant
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-
-
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen
-		//	tankType = LH2
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen/Oxidizer
-		//	tankType = LH2O
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen
-		//	tankType = LH2
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen/Oxidizer
-		//	tankType = LH2OCryo
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen
-		//	tankType = LH2Cryo
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidHydrogen/Oxidizer
-		//	tankType = LH2O
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = Oxidizer
-		//	tankType = OX
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidFuel
-		//	tankType = LF
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidMethane
-		//	tankType = LM
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-		//SUBTYPE:NEEDS[CommunityResourcePack,CryoTanks]
-		//{
-		//	name = LiquidMethane/Oxidizer
-		//	tankType = LMOx
-		//	addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		//}
-
-
-
-
-	}
-	!RESOURCE[LiquidFuel] {}
-	!RESOURCE[Oxidizer] {}
-
-    // --- delete the temp node so nothing “lingers” in the final part ---
-    !__TMP_FTP_B9PS {}	
-}
-
-@PART[TPtank?mL?????-Nuke]:HAS[@RESOURCE[LiquidFuel],!RESOURCE[Oxidizer],!MODULE[InterstellarFuelSwitch],!MODULE[FSfuelSwitch],!MODULE[ModuleB9PartSwitch]]:NEEDS[B9PartSwitch&!CryoEngines&!ModularFuelTanks&!RealFuels]:AFTER[FuelTanksPlus]
-{
-    // --- temp values stored in a disposable node ---
-    __TMP_FTP_B9PS
-    {
-        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
-
-        %massOffset = #$../mass$
-        @massOffset *= -1
-    }
-
-	MODULE
-	{
-		name = ModuleB9PartSwitch
-		moduleID = fuelSwitch
-		switcherDescription = Tank Type
-		baseVolume = #$../__TMP_FTP_B9PS/totalCap$
-
-		SUBTYPE
-		{
-			name = LiquidFuel
-			tankType = FTPLiquidFuel
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = Oxidizer
-			tankType = FTPOxidizer
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = XenonGas
-			tankType = FTPXenon
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = MonoPropellant
-			tankType = FTPMonoPropellant
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = Ore
-			tankType = FTPOre
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-	}
-	!RESOURCE[LiquidFuel] {}
-    // --- delete the temp node so nothing “lingers” in the final part ---
-    !__TMP_FTP_B9PS {}	
-}
-
-@PART[TPtankTri|TPtankCube*]:HAS[@RESOURCE[LiquidFuel],@RESOURCE[Oxidizer],!MODULE[InterstellarFuelSwitch],!MODULE[FSfuelSwitch],!MODULE[ModuleB9PartSwitch]]:NEEDS[B9PartSwitch&!CryoEngines&!ModularFuelTanks&!RealFuels]:AFTER[FuelTanksPlus]
-{
-	// --- temp values stored in a disposable node ---
-    __TMP_FTP_B9PS
-    {
-        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
-        @totalCap += #$../RESOURCE[Oxidizer]/maxAmount$
-
-        %massOffset = #$../mass$
-        @massOffset *= -1
-    }
-
-	MODULE
-	{
-		name = ModuleB9PartSwitch
-		moduleID = fuelSwitch
-		switcherDescription = Tank Type
-		baseVolume = #$../__TMP_FTP_B9PS/totalCap$
-
-		SUBTYPE
-		{
-			name = LF/O
-			tankType = FTPLFO
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = XenonGas
-			tankType = FTPXenon
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-		SUBTYPE
-		{
-			name = MonoPropellant
-			tankType = FTPMonoPropellant
-			addedMass = #$../../__TMP_FTP_B9PS/massOffset$
-		}
-	}
-	!RESOURCE[LiquidFuel] {}
-	!RESOURCE[Oxidizer] {}
-
-	// --- delete the temp node so nothing “lingers” in the final part ---
-    !__TMP_FTP_B9PS {}
-}
 
 
 

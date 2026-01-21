@@ -1,0 +1,72 @@
+// This patch supports Firespitter and Interstellar Fuel Switch.
+
+
+@PART[TPtankR??]:NEEDS[Firespitter|InterstellarFuelSwitch&!CryoTanks&!ModularFuelTanks&!RealFuels&!B9PartSwitch]:AFTER[FuelTanksPlus]
+{
+	MODULE
+	{
+		name:NEEDS[!InterstellarFuelSwitch] = FStextureSwitch2
+		name:NEEDS[InterstellarFuelSwitch] = InterstellarTextureSwitch2
+		hasSwitchChooseOption:NEEDS[InterstellarFuelSwitch] = False
+		tankSwitchNames:NEEDS[InterstellarFuelSwitch] = MonoProp;LF+OX;LiquidFuel;Oxidizer
+		textureRootFolder = FuelTanksPlus/Assets/Radial/
+		textureNames = TPtankR-rimGold-Specular;TPtankR-rimBlack-Specular;TPtankR-rimRed-Specular;TPtankR-rimBlue-Specular
+		textureDisplayNames = MonoPropellant;LF+OX;LiquidFuel;Oxidizer
+		useFuelSwitchModule = true
+		fuelTankSetups = 0; 1; 2; 3
+		objectNames = TPtankR-rim
+		nextButtonText = Next Variant
+		prevButtonText = Previous Variant
+		statusText = Current Variant
+	}
+}
+
+@PART[TPtankR0?]:NEEDS[Firespitter|InterstellarFuelSwitch&!CryoTanks&!ModularFuelTanks&!RealFuels&!B9PartSwitch]:AFTER[FuelTanksPlus]
+{
+	// --- temp values stored in a disposable node ---
+    __TMP_FTP_R01
+    {
+        %LF = #$../RESOURCE[LiquidFuel]/maxAmount$
+
+        %LFTankMass = #$LF$
+        @LFTankMass *= 0.000125
+
+        %OX = #$../RESOURCE[Oxidizer]/maxAmount$
+        %OXTankMass = #$OX$
+        @OXTankMass *= 0.000125
+
+		%LFOTankMass = #$LFTankMass$ 
+		@LFOTankMass += #$OXTankMass$
+
+        %totalCap = #$../RESOURCE[LiquidFuel]/maxAmount$
+        @totalCap += #$../RESOURCE[Oxidizer]/maxAmount$
+
+        %Monoprop = #$totalCap$
+        @Monoprop *= 1.5
+        %MonopropTankMass = #$totalCap$
+        @MonopropTankMass *= 0.0004
+    }
+	MODULE
+	{
+		name:NEEDS[!InterstellarFuelSwitch] = FSfuelSwitch
+		name:NEEDS[InterstellarFuelSwitch] = InterstellarFuelSwitch
+		useTextureSwitchModule:NEEDS[InterstellarFuelSwitch] = True
+		tankSwitchNames:NEEDS[InterstellarFuelSwitch] = MonoProp;LF+OX;LiquidFuel;Oxidizer
+		resourceNames = MonoPropellant;LiquidFuel,Oxidizer;LiquidFuel;Oxidizer
+		resourceAmounts = #$../__TMP_FTP_R01/Monoprop$;$../__TMP_FTP_R01/LF$,$../__TMP_FTP_R01/OX$;$../__TMP_FTP_R01/totalCap$;$../__TMP_FTP_R01/totalCap$
+
+		tankMass = #$../__TMP_FTP_R01/MonopropTankMass$;$../__TMP_FTP_R01/LFOTankMass$;$../__TMP_FTP_R01/LFTankMass$;$../__TMP_FTP_R01/OXTankMass$
+		basePartMass = #$../mass$
+
+		displayCurrentTankCost = true
+		hasGUI = false
+		availableInFlight = false
+		availableInEditor = true
+		showInfo = false
+	}
+	!RESOURCE[LiquidFuel] {}
+	!RESOURCE[Oxidizer] {}
+
+	// --- delete the temp node so nothing “lingers” in the final part ---
+	!__TMP_FTP_R01 {}
+}
