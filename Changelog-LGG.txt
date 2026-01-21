@@ -24,6 +24,7 @@ Changelog
 	Adjusted height of the TPtank3mL11250 and TPtank3mL05225 to match the stock tank Size3MediumTank proportionally
 
 	Adjusted values for the B9 tank types
+	Adjusted values for the Firespitter configs
 	
 	Added (disabled) support for Cryotanks using B9PartSwitcher.  Current tanks available are:
 		LH2O, LH2, LH2OCryo, LH2Cryo, OX, LF, LFOX, LM, LMOx
