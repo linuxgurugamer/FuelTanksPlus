@@ -22,3 +22,9 @@ Changelog
 	Fixed error when B9 was being used, variables were being left behind because the code to delete them was wrong
 	Fixed error when Firespitter or InterstellarFuelSwitch was being used, variables were being left behind because the code to delete them was wrong
 	Adjusted height of the TPtank3mL11250 and TPtank3mL05225 to match the stock tank Size3MediumTank proportionally
+
+	Adjusted values for the B9 tank types
+	
+	Added (disabled) support for Cryotanks using B9PartSwitcher.  Current tanks available are:
+		LH2O, LH2, LH2OCryo, LH2Cryo, OX, LF, LFOX, LM, LMOx
+		Support is  currently commented out in the file FuelSwitch.cfg
