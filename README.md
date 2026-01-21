@@ -21,12 +21,12 @@ REQUIRED Dependencies: (version 1.0+)
 
 Part of the NecroBones suite of mods, that work nicely together:
 
-    Modular Rocket Systems (stock-alike parts pack, NASA-like alternatives, and filling the gaps)
-    SpaceY Heavy Lifters Parts Pack (stock-balanced large rocket parts, 5m parts, large SRBs)
-    Color Coded Canisters (replacement models/textures for stock fuel tanks: prettier, cleaner, and diameter color-coding for the tank end-caps)
-    Fuel Tanks Plus (collection of large stock-like tanks with Color Coded Canister style)
-    ColorFuel Lines (color-selctable fuel lines)
-    Lithobrake Exploration Technologies (lander parts, large chutes/legs/ladders/etc)
+    * Modular Rocket Systems (stock-alike parts pack, NASA-like alternatives, and filling the gaps)
+    * SpaceY Heavy Lifters Parts Pack (stock-balanced large rocket parts, 5m parts, large SRBs)
+    * Color Coded Canisters (replacement models/textures for stock fuel tanks: prettier, cleaner, and  diameter color-coding for the tank end-caps)
+    * Fuel Tanks Plus (collection of large stock-like tanks with Color Coded Canister style)
+    * ColorFuel Lines (color-selctable fuel lines)
+    * Lithobrake Exploration Technologies (lander parts, large chutes/legs/ladders/etc)
 
 Design Goals
 
