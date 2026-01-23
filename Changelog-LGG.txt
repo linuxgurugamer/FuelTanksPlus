@@ -22,14 +22,11 @@ Changelog
 	Fixed error when B9 was being used, variables were being left behind because the code to delete them was wrong
 	Fixed error when Firespitter or InterstellarFuelSwitch was being used, variables were being left behind because the code to delete them was wrong
 	Adjusted height of the TPtank3mL11250 and TPtank3mL05225 to match the stock tank Size3MediumTank proportionally
-
 	Adjusted values for the B9 tank types
 	Adjusted values for the Firespitter configs
-	
 	Added (disabled) support for Cryotanks using B9PartSwitcher.  Current tanks available are:
 		LH2O, LH2, LH2OCryo, LH2Cryo, OX, LF, LFOX, LM, LMOx
 		Support is  currently commented out in the file FuelSwitch.cfg
-
 	Split B9 fuel switch into new file for both the main and  the FSMeshSwitch folder
 	Renamed the FSMeshSwitch foler to Radial to better reflect the parts it's touching
 	Updated the Radial/000_TPtankR_MM.cfg patch to address all three radial parts with a single patch
